@@ -1,39 +1,101 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<conio.h>
-#define PIN_addr "D:\\data\\密码管理系统\\PIN_info.txt"
+#define PIN_addr "D:\\C-project\\密码管理系统\\PIN_info.txt"
 struct password{
     char name[20];
     char account[20];
     char PIN[20];
     struct password *next;
 }local;
-int n = 0;
+struct password *head = NULL;//用单链表存储多组密码
 
-struct password *input(void)
+/* 登录 */
+void login(){
+	char name[20],PIN[100],ch;
+	int i;
+	while(1){
+		/* 欢迎界面 */
+		printf("\n\n\n\n\n\n\n");
+		printf("    ________________________________________________\n");
+		printf("    |>>>>>>>>>>>>>> 密码信息管理系统 <<<<<<<<<<<<<<|\n");
+		printf("    |                                              |\n");
+		printf("    |                                              |\n");
+ 		printf("    |                                              |\n");
+		printf("    |                                              |\n");
+		printf("    |            欢迎您使用密码管理系统！          |\n");
+		printf("    |                作者：劣等生                  |\n");
+   		printf("    |                                              |\n");
+		printf("    |                                              |\n");
+		printf("    |                                              |\n");
+		printf("    |______________________________________________|\n");
+		printf("                        >>start");
+		system("pause>NULL");
+		system("cls");
+		/* 用户名验证 */
+		printf("\n\n\n\n\n\t\t请输入用户名：");
+		scanf("%s",name);
+		if(strcmp(name,"kv")!=0) {
+			system("cls");
+			printf("\n\n\n\n\n\t\t用户名错误!");
+			system("pause>NULL");
+			system("cls");
+			continue;
+		}
+		while(getchar()!='\n');
+		printf("\t\t请输入密钥：");
+		ch = getch();
+		printf("*");
+		i = 0;
+		do{
+			PIN[i++] = ch;
+			ch = getch();
+			if(ch == '\r') break;
+	 		printf("*");
+		}while(i < 20);
+		PIN[i] = '\0';
+		if(strcmp(PIN,"kv")!=0) {
+			system("cls");
+			printf("\n\n\n\n\n\t\t密钥错误!");
+			system("pause>NULL");
+			system("cls");
+		}
+		else{
+			system("cls");
+			return;//登录成功
+		}
+	}
+}
+
+void* input()
 {
-    struct password *p1,*p2,*head;
+    struct password *p1,*p2;
     p1=(struct password *)malloc(sizeof(struct password));
     printf("\n\t------输入#结束输入------\n");
     printf("      name        account         PIN\n");
     printf(">> ");
     scanf("%s%s%s",p1->name,p1->account,p1->PIN);
     if(p1->name[0] == '#')
-    	return;
-    while(1){
-        n++;
-        if(n == 1)head = p1;
-        else p2->next = p1;
+    	return NULL;
+	if(head == NULL){
+		head = p1;
+	}
+	else {
+		p2 = head;
+		while(p2->next){
+			p2 = p2->next;
+		}
+	}
+    while(p1->name[0] != '#'){
+    	if(head != p1) p2->next = p1;
         p2 = p1;
         p1 = (struct password *)malloc(sizeof(struct password));
         printf(">> ");
   		scanf("%s%s%s",p1->name,p1->account,p1->PIN);
-    	if(p1->name[0] == '#') break;
     }
-     printf("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n");
     p2->next = NULL;
+    printf("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n");
     system("pause>NULL");
-    return head;
 }
 
 void print(struct password *p)
@@ -53,14 +115,15 @@ void print(struct password *p)
     system("pause>NULL");
 }
 
-void save(struct password *p){
-	if(p==NULL){
+void save(){
+	if(head == NULL){
 		printf("                不存在可保存的输入信息\n");
 		system("pause>NULL");
 		system("cls");
 		return;
 	} 
-	struct password *head = p;
+	struct password *p = head;
+	/* 写入文件中 */
 	FILE *fp = fopen(PIN_addr,"a+");
     while(p){
     	fprintf(fp,"%s %s %s\n",p->name,p->account,p->PIN);
@@ -68,22 +131,17 @@ void save(struct password *p){
     }
     printf("                save file success\n");
     p = head;
+    /* 释放空间，并将头节点置为NULL */
     while(p){
 		head = head->next;
 		free(p);
 		p = head;
 	}
+	head = NULL;
     printf("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n");
     fclose(fp);
     system("pause>NULL");
 }
-
-//int readnum(void){
-//	FILE *f = fopen(PIN_addr,"r");;
-//	int num;
-//  fscanf(f,"%d",&num);
-//  return num;
-//}
 
 struct password *read(void){
 	FILE *fp = fopen(PIN_addr,"a+");
@@ -146,62 +204,13 @@ void search (void){
 	fclose(fp);
 	system("pause>NULL");
 }
+
+
+
 int main()
 {
-	//登陆身份验证
-	char name[20],PIN[20],ch;
-	int i;
-	start:
-	printf("\n\n\n\n\n\n\n");
-	printf("    ________________________________________________\n");
-	printf("    |>>>>>>>>>>>>>> 密码信息管理系统 <<<<<<<<<<<<<<|\n");
-	printf("    |                                              |\n");
-	printf("    |                                              |\n");
- 	printf("    |                                              |\n");
-	printf("    |                                              |\n");
-	printf("    |            欢迎您使用密码管理系统！          |\n");
-	printf("    |                作者：劣等生                  |\n");
-   	printf("    |                                              |\n");
-	printf("    |                                              |\n");
-	printf("    |                                              |\n");
-	printf("    |______________________________________________|\n");
-	printf("                        >>start");
-	system("pause>NULL");
-	system("cls");
-	printf("\n\n\n\n\n\t\t请输入用户名：");
-	scanf("%s",name);
-	if(strcmp(name,"kv")!=0) {
-		system("cls");
-		printf("\n\n\n\n\n\t\t用户名错误!");
-		system("pause>NULL");
-		system("cls");
-		goto start;
-	}
-	while(getchar()!='\n');
-	printf("\t\t请输入密钥：");
-	ch = getch();
-	printf("*");
-	i = 0;
-	do{
-		PIN[i++] = ch;
-		ch = getch();
-		if(ch == '\r') break;
-	 	printf("*");
-	}while(i < 20);
-	PIN[i] = '\0';
-	if(strcmp(PIN,"kv")!=0) {
-		system("cls");
-		printf("\n\n\n\n\n\t\t密钥错误!");
-		system("pause>NULL");
-		system("cls");
-		goto start;
-	}
-	system("cls");
-	//密码系统
-    struct password *head = NULL;
-    struct password *_head = NULL;
+	login();//登录
     char option;
-    //int num = readnum();
     while(1){
     	printf("\n\n\n");
         printf("________________________________________________________________________\n");
@@ -221,7 +230,7 @@ int main()
     	switch (option)
     	{
     		case '0':return 0;
-    		case '1':head=input();break;
+    		case '1':input();break;
     		case '2':print(head);break;
     		case '3':save(head);break;
     		case '4':read();break;
