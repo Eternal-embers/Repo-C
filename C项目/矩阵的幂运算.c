@@ -114,10 +114,10 @@ struct Matrix *matrixPow(struct Matrix *M,int n){
 
 int main(){
 	int matrix1[4][4] = {
-		0,1,0,1,
-		1,0,1,1,
 		0,1,1,0,
-		1,1,0,0
+		1,0,1,1,
+		1,0,0,0,
+		0,0,0,1
 	};
 	/* µÚÒ»ÂÖ²âÊÔ */
 	struct Matrix *M1 = createMatrix((int *)matrix1,4,4);

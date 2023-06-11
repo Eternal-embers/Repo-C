@@ -214,7 +214,7 @@ struct poly *input(){
 	P = createPoly(data,len);//创建多项式
 	printf("\t\t输入结果：");
  	showPoly(P,0,0);
- 	printf("\n\t\t- - - - - - - - - - - - - - - - - - - - - - - - -\n");
+ 	printf("\n\t\t- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n");
 	return P;
 }
 
@@ -237,7 +237,7 @@ void depose_res(struct poly *res){
 		clear(res);
 		printf("\t\t释放空间成功!\n");
 	}
-	printf("\t\t- - - - - - - - - - - - - - - - - - - - - - - - -\n");
+	printf("\t\t- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n");
 }
 
 int main(){
@@ -249,7 +249,7 @@ int main(){
 		if(option == 1){
             struct poly *poly1,*poly2,*res;
             /* 输入两个多项式*/
-            printf("\t\t- - - - - - - - - - - - - - - - - - - - - - - - -\n");
+            printf("\t\t- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n");
             printf("\t\t>>>f1\n");
             poly1 = input();
             printf("\t\t>>>f2\n");
@@ -330,7 +330,7 @@ int main(){
 			}
 			else printf("\t\t输入错误！\n");
 			system("pause>NULL");
-			printf("\n\t\t- - - - - - - - - - - - - - - - - - - - - - - - -\n");
+			printf("\n\t\t- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n");
 		}
 		else if(option == 0){
 			printf("\t\t感谢您的使用！");

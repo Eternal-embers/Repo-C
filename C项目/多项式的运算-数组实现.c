@@ -5,10 +5,12 @@ typedef struct Node{
 	int* coef;//系数coefficient
 	int maxEpt;//最高幂次数maxExponent
 }node,*polynomial;
+
 struct result{
 	polynomial result[20][3];
 	char Operator;
 }res;
+
 int size = 0;
 polynomial fx[3];
 
@@ -148,7 +150,7 @@ void viewResult(int index){
 void menu(){
 	printf("\n\n");
 	printf("\t\t\t_____________________________________________\n");
-	printf("\t\t\t|                                           |\n");
+	printf("\t\t\t|          ______________________           |\n");
 	printf("\t\t\t|          |>>>>多项式计算器<<<<|           |\n");
 	printf("\t\t\t|          菜单：                           |\n");
 	printf("\t\t\t|          退出- - - - - - - - -0           |\n");
