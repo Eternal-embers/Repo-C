@@ -1,6 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
-#define INF 0xfffffff
+#define INF 0x7fffffff
 
 typedef struct Graph{
 	char *vex;
@@ -56,8 +56,10 @@ void dfs(Graph *G,int index,int *visited){
 Edge *initEdge(Graph *G){
 	Edge *edge = (Edge *)malloc(sizeof(Edge) * G->arcNum);
 	int i,j,index = 0;
+	for(i = 0;i < G->arcNum;i++)
+		edge[i].weight = INF;
 	for(i = 0;i < G->vexNum - 1;i++){
-		////j从i + 1开始计数能有效避免选取重复的边，因为邻接矩阵沿对角线对称
+		//j从i + 1开始计数能有效避免选取重复的边，因为邻接矩阵沿对角线对称
 		//j从i+1计数，最终选取的边数是G->arcNum,不会选取重复的边
 		for(j = i + 1;j < G->vexNum;j++){
 			if(G->arc[i][j] != INF){

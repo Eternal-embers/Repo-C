@@ -2,6 +2,7 @@
 	Name:
 	Copyright:劣等生
 	Author:劣等生
+
 	Date:02/04/23 14:36
 	Description:多项式的运算-链表实现
 */
@@ -79,10 +80,13 @@ struct poly* createPoly(double (*data)[2],int length)
 //index_digit指定指数的最大小数位数
 void showPoly(struct poly *P,int coef_digit,int index_digit){
 	if(P){
+		int cnt = 0;
 		struct poly *node = P;
 		while(node->next){
 			if(node->coef != 0){
 				printf("(%.*f)*[X^%.*f] + ",coef_digit,node->coef,index_digit,node->index);
+				cnt++;
+				if(cnt % 6 == 0) printf("\n\t\t");
 			}
 			node = node->next;
 		}
@@ -182,21 +186,21 @@ void clear(struct poly *P){
 }
 
 void menu(){
-	printf("\t\t______________________________________________\n");
-	printf("\t\t|                                            |\n");
-	printf("\t\t|          ________________________          |\n");
-	printf("\t\t|          |>>>>>多项式的运算<<<<<|          |\n");
-	printf("\t\t|          菜单：                            |\n");
-	printf("\t\t|          退出- - - - - - - - - - - 0       |\n");
-	printf("\t\t|                                            |\n");
-	printf("\t\t|          两个多项式的乘法运算- - - 1       |\n");
-	printf("\t\t|                                            |\n");
-	printf("\t\t|          多个多项式的乘法运算- - - 2       |\n");
-	printf("\t\t|                                            |\n");
-	printf("\t\t|          多项式的幂计算运算- - - - 3       |\n");
-	printf("\t\t|                                            |\n");
-	printf("\t\t|          查看保存结果- - - - - - - 4       |\n");
-	printf("\t\t|____________________________________________|\n");
+	printf("\t\t_______________________________________________\n");
+	printf("\t\t|                                             |\n");
+	printf("\t\t|          ________________________           |\n");
+	printf("\t\t|          |>>>>>多项式的运算<<<<<|           |\n");
+	printf("\t\t|          菜单：                             |\n");
+	printf("\t\t|          退出- - - - - - - - - - - 0        |\n");
+	printf("\t\t|                                             |\n");
+	printf("\t\t|          两个多项式的乘法运算- - - 1        |\n");
+	printf("\t\t|                                             |\n");
+	printf("\t\t|          多个多项式的乘法运算- - - 2        |\n");
+	printf("\t\t|                                             |\n");
+	printf("\t\t|          多项式的幂计算运算- - - - 3        |\n");
+	printf("\t\t|                                             |\n");
+	printf("\t\t|          查看保存结果- - - - - - - 4        |\n");
+	printf("\t\t|_____________________________________________|\n");
 	printf("\n\t\t>>");
 }
 
@@ -213,7 +217,7 @@ struct poly *input(){
 	}
 	P = createPoly(data,len);//创建多项式
 	printf("\t\t输入结果：");
- 	showPoly(P,0,0);
+ 	showPoly(P,1,1);//此处调节打印输入的多项式的精度，第二和第三个参数分别表示系数和指数精确到小数点后几位
  	printf("\n\t\t- - - - - - - - - - - - - - - - - - - - - - - - -\n");
 	return P;
 }
@@ -324,7 +328,7 @@ int main(){
 				while(i < size){
 					printf("\t\t%d  ",i);
 	 				showPoly(result[i],coef_digit,index_digit);
-					printf("\n");
+					printf("\n\n");
 					i++;
 				}
 			}

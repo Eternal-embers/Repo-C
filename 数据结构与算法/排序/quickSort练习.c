@@ -34,6 +34,7 @@ void quickSort(int arr[],int low,int high){
 	quickSort(arr,low,j-1);//对index左边进行快速排序
 	quickSort(arr,j+1,high);//对index右边进行快速排序
 }
+
 int main()
 {
 	int arr[N];

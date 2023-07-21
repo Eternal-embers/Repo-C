@@ -105,7 +105,7 @@ int main(){
 		  5,INF,  5,  0,INF,  2,
 	  	INF,  3,  6,INF,  0,  6,
 	  	INF,INF,  4,  2,  6,  0
-	};//到自己为0，如果不连通为MAX
+	};//到自己为0，如果不连通为INF
 	int visited[6] = {0,0,0,0,0,0};
 	Gragh *G = initGragh(6);
 	createGragh(G,"ABCDEF",(int *)arcs);
