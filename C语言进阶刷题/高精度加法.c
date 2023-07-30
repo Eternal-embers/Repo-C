@@ -1,33 +1,62 @@
+/*
+	Name:
+	Copyright:劣等生
+	Author:劣等生
+	Date: 07/23 17:28
+	Description: 高精度加法练习
+*/
 #include<stdio.h>
-int main()
-{
-	int a[100]={0},b[100]={0},i=0,bt1=1,bt2=1,bit,add=0,count = 0;
-	do{
-		scanf("%d",&a[bt1]);
-	}while(a[bt1++]!=11);
-	a[bt1-1] = 0;
-	bt1-=2;
-	do{
-		scanf("%d",&b[bt2]);
-	}while(b[bt2++]!=11);
-	b[bt2-1] = 0;
-	bt2-=2;
-	bit = (bt1>bt2)?bt1:bt2;
-	int res[bit+1];
-	for(i = bit;i>=0;i--){
-	res[i] = a[i]+b[i]+add;
-	if(res[i]>=10) add = 1;
-		else add = 0;
-	res[i]%=10;
-	}
-	if(res[0]!=0){
-	printf("%d",res[0]);
-	count++;
-	}
-	for(i = 1;i<=bit;i++){
-	printf("%d",res[i]);
-	count++;
-	if(count%3==0)printf(",");
-	}
-	return 0;
+#include <stdlib.h>
+#include <string.h>
+#define LEN 104
+
+int a[LEN],b[LEN],c[LEN];
+
+void clear(int a[]){
+    int i;
+    for(i = 0;i < LEN;i++){
+      a[i] = 0;
+    }
 }
+
+void read(int a[]){
+    char s[LEN];
+    scanf("%s",s);
+    int len = strlen(s);
+    int i;
+    for(i = 0;i < len;i++){
+		a[len - i - 1] = s[i] - '0';
+	}
+}
+
+void print(int a[]){
+	int i;
+	for(i = LEN - 1;i > 0;--i){
+		if(a[i] != 0) break;
+	}
+	while(i >= 0){
+		putchar(a[i--] + '0');
+	}
+}
+
+void add(int a[],int b[]){
+	clear(c);
+	int i;
+	for(i = 0;i < LEN;i++){
+		c[i] += a[i] + b[i];
+		if(c[i] >= 10){
+			c[i + 1] += 1;
+			c[i] -= 10;
+		}
+	}
+}
+
+int main(int argc, char *argv[])
+{
+  read(a);
+  read(b);
+  add(a,b);
+  print(c);
+  return 0;
+}
+
