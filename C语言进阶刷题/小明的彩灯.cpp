@@ -1,9 +1,9 @@
 /*
 	Name:
-	Copyright:劣等生
-	Author:劣等生
+	Copyright:锟接碉拷锟斤拷
+	Author:锟接碉拷锟斤拷
 	Date: 07/29 13:07
-	Description: 小明的彩灯
+	Description: 小锟斤拷锟侥彩碉拷
 */
 #include<stdio.h>
 #define LL long long
