@@ -78,6 +78,7 @@ struct Matrix *matrixInverse(struct Matrix *M){
         	*(matrix + i * M_inv->cols + j) = *(M->matrix + i * M->cols + j);
 		}
 	}
+	/* 设置增广矩阵右半部分为单位矩阵 */
 	for(i = 0;i < M_inv->rows;i++){
 		for(j = M->cols;j < M_inv->cols;j++){
 			if(i + M->cols == j)
@@ -86,7 +87,11 @@ struct Matrix *matrixInverse(struct Matrix *M){
 				*(matrix + i * M_inv->cols + j) = 0;
 		}
 	}
+	printf("并入单位矩阵得到增广矩阵：\n");
+	matrixPrint(M_inv);
+	putchar('\n');
 	/* 矩阵消元,高斯-若尔当思想,假设矩阵中主元位置都不会为0 */
+	//向下消元
 	for(i = 0;i < M_inv->rows - 1;i++){//主元在第i行
 		for(j = i + 1;j < M_inv->rows;j++){//对第j行进行消元
 			int multiple = *(M_inv->matrix + j * M_inv->cols + i) / *(M_inv->matrix + i * M_inv->cols + i);
@@ -94,6 +99,10 @@ struct Matrix *matrixInverse(struct Matrix *M){
 				*(M_inv->matrix + j * M_inv->cols + k) -= multiple * (*(M_inv->matrix + i * M_inv->cols + k));
 		}
 	}
+	printf("向下消元：\n");
+	matrixPrint(M_inv);
+	putchar('\n');
+	//向上消元
 	for(i = M_inv->rows - 1;i > 0;i--){//主元在第i行
         for(j = i - 1;j >= 0;j--){//对第j行进行消元
 			int multiple = *(M_inv->matrix + j * M_inv->cols + i) / *(M_inv->matrix + i * M_inv->cols + i);
@@ -101,7 +110,18 @@ struct Matrix *matrixInverse(struct Matrix *M){
 				*(M_inv->matrix + j * M_inv->cols + k) -= multiple * (*(M_inv->matrix + i * M_inv->cols + k));
 		}
 	}
+	printf("向上消元：\n");
 	matrixPrint(M_inv);
+	putchar('\n');
+	for(i = 0;i < M_inv->rows - 1;i++){//将主元位置变为1，通过将该行同时除以某个数实现
+		if(*(M->matrix + i * M_inv->cols + i) != 1){//如果不为1，则通过将该行除以某个数使得主元位置为1
+			int divisor = *(M->matrix + i * M_inv->cols + i);
+			for(j = 0;j < M_inv->cols;j++){
+				*(M->matrix + i * M_inv->cols + j) /= divisor;
+			}
+			putchar('\n');
+		}
+	}
 	/* 分割出矩阵的逆 */
 	int* matrix_inv = (int *)malloc(sizeof(int) * M->cols * M->rows);
 	for(i = 0;i < M_inv->rows;i++){
@@ -117,12 +137,14 @@ struct Matrix *matrixInverse(struct Matrix *M){
 
 int main(){
 	int m[3][3] = {
-		1,0,1,
-		2,1,2,
-		-1,1,0
+		1,2,3,
+		2,5,7,
+		3,6,10,
 	};
 	struct Matrix *M = createMatrix(3,3,(int *)m);
+	printf("矩阵A: \n");
 	matrixPrint(M);
+	putchar('\n');
 	struct Matrix *M_inv = matrixInverse(M);
 	printf("矩阵的逆：\n");
 	matrixPrint(M_inv);

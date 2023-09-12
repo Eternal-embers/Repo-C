@@ -2,8 +2,8 @@
 	Name:
 	Copyright:劣等生
 	Author:劣等生
-	Date:24/03/23 10:15
-	Description:大数除法
+	Date:
+	Description:
 */
 #include<stdio.h>
 #include<string.h>
@@ -33,6 +33,7 @@ void bigNumberAddition(char* x1,char* x2){
 		len2--;
 	}//向前挪位
 	
+    /* 处理负号 */
 	if(flag1 == 0 && flag2 == 1) flag = 0;//负数减正数，结果为负
 	else if( (flag1 == 1 && flag2 == 1) && (len1 < len2 || len1 == len2 && x1[0] < x2[0]) ){
 		flag = 0; //小的正数减去一个大的正数，结果为负
@@ -40,23 +41,15 @@ void bigNumberAddition(char* x1,char* x2){
 	else if( (flag1 == 0 && flag2 == 0) && (len1 > len2 || len1 == len2 && x1[0] > x2[0]) ){
 		flag = 0;//小的负数减去一个大的负数，结果为负
 	}
-	
-	/*将数字字符串转换为数组*/
+
+	/* 将数字字符串转换为数组 */
 	int n1[len1],n2[len2];
 	//将数字从低位到高位排序,方便进位
 	for(i = 0;i < len1;i++)
 		n1[len1 - i - 1] = x1[i] - '0';
 	for(i = 0;i < len2;i++)
 		n2[len2 - i - 1] = x2[i] - '0';
-	/*
-	for(i = 0;i < len1;i++)
-		printf("%d",n1[i]);
-	putchar('\n');
-	for(i = 0;i < len2;i++)
-		printf("%d",n2[i]);
-	putchar('\n');
-	*/
-	
+
 	/*计算结果*/
 	int len = len1 > len2 ? len1 + 1 : len2 + 1;
 	int res[len];
@@ -78,7 +71,7 @@ void bigNumberAddition(char* x1,char* x2){
 					else res[i] = n2[i];
 		}
 	}
-	
+
 	/*进位*/
 	for(i = 0;i < len;i++){
 		if(res[i] >= 10){
@@ -86,14 +79,9 @@ void bigNumberAddition(char* x1,char* x2){
 			res[i] %= 10;
 		}
 	}
-	/*
-	for(i = 0;i < len;i++)
-		printf("%d ",res[i]);
-	putchar('\n');
-	*/
-	
+
 	/*确定最终位数*/
-    for(i = len - 1;i >= 0;i--){
+       for(i = len - 1;i >= 0;i--){
 		if(res[i] > 0){
 			len = i + 1;
 			break;
@@ -101,6 +89,7 @@ void bigNumberAddition(char* x1,char* x2){
 	}
 	if(i < 0) len = 0;
 	int count = len;
+	
 	/*输出结果*/
 	if(len == 0) {
 		putchar('0');
@@ -126,4 +115,3 @@ int main(){
 	system("pause>NULL");
 	return 0;
 }
-

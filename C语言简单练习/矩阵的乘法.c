@@ -86,7 +86,7 @@ struct Matrix *matrixMultiple1(struct Matrix *M1,struct Matrix *M2){
 }
 
 /* 向量乘法 */
-void vectorMatrix(struct Matrix *M1,int row,struct Matrix *M2,int col,struct Matrix *M3){//M1的第row行乘以M2的第col列
+void vectorMultiple(struct Matrix *M1,int row,struct Matrix *M2,int col,struct Matrix *M3){//M1的第row行乘以M2的第col列
 	int i;
 	int k = M1->cols;
 	for(i = 0;i < k;i++){
@@ -104,7 +104,7 @@ struct Matrix *matrixMultiple2(struct Matrix *M1,struct Matrix *M2){
 	struct Matrix *M3 = createMatrix(M1->rows,M2->cols,matrix);
 	for(i = 0;i < M1->rows;i++){
 		for(j = 0;j < M2->cols;j++){
-   			vectorMatrix(M1,i,M2,j,M3);
+   			vectorMultiple(M1,i,M2,j,M3);
 		}
 	}
 	return M3;
@@ -128,9 +128,22 @@ int main(){
 		1,6,
 		-1,2
 	};
+	int m7[4][4] = {
+		1,0,1,-2,
+		0,1,0,1,
+		-1,2,-1,0,
+		0,-1,0,-1
+	};
+	int m8[4][4] = {
+		1,0,1,0,
+		0,-1,0,1,
+		1,0,1,0,
+		0,1,0,-1
+	};
 	struct Matrix *M1 = createMatrix(2,2,(int *)m1);
 	struct Matrix *M2 = createMatrix(2,2,(int *)m2);
 	struct Matrix *M3 = matrixMultiple1(M1,M2);
+	printf("公式法：\n");
 	matrixPrint(M1);
 	matrixPrint(M2);
 	matrixPrint(M3);
@@ -138,9 +151,17 @@ int main(){
 	struct Matrix *M4 = createMatrix(2,3,(int *)m4);
 	struct Matrix *M5 = createMatrix(2,2,(int *)m5);
 	struct Matrix *M6 = matrixMultiple2(M4,M5);
+	printf("向量法：\n");
 	matrixPrint(M4);
 	matrixPrint(M5);
 	matrixPrint(M6);
+	struct Matrix *M7 = createMatrix(4,4,(int *)m7);
+	struct Matrix *M8 = createMatrix(4,4,(int *)m8);
+	struct Matrix *M9 = matrixMultiple1(M7,M8);
+	printf("分块乘法：\n");
+	matrixPrint(M7);
+	matrixPrint(M8);
+	matrixPrint(M9);
 	return 0;
 }
 
