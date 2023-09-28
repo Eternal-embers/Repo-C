@@ -140,6 +140,16 @@ int main(){
 		1,0,1,0,
 		0,1,0,-1
 	};
+	int a[3][3] = {
+		1,2,3,
+		2,5,7,
+		3,6,10
+	};
+	int a_inv[3][3] = {
+		8,-2,-1,
+		1,1,-1,
+		-3,0,1
+	};
 	struct Matrix *M1 = createMatrix(2,2,(int *)m1);
 	struct Matrix *M2 = createMatrix(2,2,(int *)m2);
 	struct Matrix *M3 = matrixMultiple1(M1,M2);
@@ -162,6 +172,11 @@ int main(){
 	matrixPrint(M7);
 	matrixPrint(M8);
 	matrixPrint(M9);
+	struct Matrix *A = createMatrix(3,3,(int *)a);
+	struct Matrix *A_inv = createMatrix(3,3,(int *)a_inv);
+	struct Matrix *I = matrixMultiple1(A,A_inv);
+	printf("A * A_inv = \n");
+ 	matrixPrint(I);
 	return 0;
 }
 
