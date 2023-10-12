@@ -41,7 +41,7 @@ int *getNext(String *s){
 	int *next = (int *)calloc(s->len,sizeof(int));//按需开辟数组
 	int i=0,j=-1;
 	next[0]=-1;
-	while(i < s->len){
+	while(i < s->len - 1){
 		if(j == -1 || s->data[i]==s->data[j]){
 			next[++i] = ++j;
 		}
@@ -79,8 +79,8 @@ int main()
 	String *s1 = (String *)malloc(sizeof(String));
 	s = initString();
 	s1 = initString();
-	stringAssign(s,"abacbacaabcaababcabcabababac");
-	stringAssign(s1,"abababac");
+	stringAssign(s,"aaabbbaaabbbaaabab");
+	stringAssign(s1,"aaabab");
 	printString(s);
 	printString(s1);
 	int *next=getNext(s1);

@@ -68,7 +68,7 @@ int kmpMatch(String *master,String *sub,int *next){
 	int i=0;
 	int j=0;
 	while(i < master->len && j < sub->len)	{
-		if(j == 0 || master->data[i] == sub->data[j]){
+		if(j == -1 || master->data[i] == sub->data[j]){
 			i++;
 			j++;
 		}
@@ -76,18 +76,21 @@ int kmpMatch(String *master,String *sub,int *next){
 			j = next[j];
 		}
 	}
-		if(j == sub->len){
-			printf("kmp match success.\n");
-		}
-		else printf("kmp match failed.\n");
-		return i-j+1;
+	if(j == sub->len){
+		printf("kmp match success.\n");
+		return i - j;
+	}
+	else {
+		printf("kmp match failed.\n");
+		return -1;
+	}
 }
 
 int main()
 {
 	String *s = initString();//Ö÷´® 
 	String *s1 = initString();//Ä£Ê½´®
-	StringAssign(s,"ababbabacabcababbbaabbcabbabbaaabab");
+	StringAssign(s,"aaabbaababbb");
 	StringAssign(s1,"aaabab");
 	printString(s);
 	printString(s1);
