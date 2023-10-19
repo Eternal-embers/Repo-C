@@ -68,7 +68,7 @@ Spa* transpose(Spa *spa){
 	return tran;
 }
 
-/* 转置的优化算法，时间复杂度O(cols * length) */
+/* 转置的优化算法，时间复杂度O(cols + length) */
 Spa *tranpose_optimize(Spa *spa){
 	Spa *tran = (Spa *)malloc(sizeof(Spa) * (spa[0].v + 1));//转置矩阵
 	int r[spa[0].j];//转置矩阵中各行的非零元数目
