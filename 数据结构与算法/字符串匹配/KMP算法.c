@@ -44,12 +44,12 @@ void printString(String *s){
 int* getNext(String* s){
 	int * next =(int *)calloc(s->len+1,sizeof(int));//开辟next数组 
 	int i=0,j=-1;
-	next[0]=-1;
+	next[0]=-1;//回溯的终止点
 	while( i < s->len-1){
 		if( j==-1 || s->data[i] == s->data[j]){
-			next[++i]=++j;
+			next[++i]=++j;//指针后移一位，next数组记录匹配状态
 		}
-		else j=next[j];
+		else j=next[j];//回溯
 		printf("i=%d,j=%d,next[%d]=%d\n",i,j,i,next[i]);
 	}
 	return next;
@@ -90,12 +90,17 @@ int main()
 {
 	String *s = initString();//主串 
 	String *s1 = initString();//模式串
-	StringAssign(s,"aaabbaababbb");
+	StringAssign(s,"aaabbaaababbb");
 	StringAssign(s1,"aaabab");
 	printString(s);
 	printString(s1);
 	int *next = getNext(s1);
 	printNext(next,s1->len);
-	kmpMatch(s,s1,next);
+	int pos = kmpMatch(s,s1,next);
+	printString(s);
+	int i;
+	for(i = 0;i < pos;i++)
+		printf("   ");
+	printString(s1);
 	return 0;
 }
