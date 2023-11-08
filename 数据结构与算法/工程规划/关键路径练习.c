@@ -225,7 +225,8 @@ void criticalPath(Graph *G){
 }
 
 int main() {
-	Graph* G = initGraph(9);
+	Graph* G = initGraph(6);
+	/*
 	int arcs[9][9] = {
 		  0,  6,  4,  5,INF,INF,INF,INF,INF,
 		INF,  0,INF,INF,  1,INF,INF,INF,INF,
@@ -237,8 +238,17 @@ int main() {
 		INF,INF,INF,INF,INF,INF,INF,  0,  4,
 		INF,INF,INF,INF,INF,INF,INF,INF,  0
 	};
-	createGraph(G, (char *)"012345678", (int*)arcs);
-	int visited[9] = { 0 };
+	*/
+	int arcs[6][6] = {
+		  0,  3,  2,INF,INF,INF,
+		INF,  0,  4,  4,INF,INF,
+		INF,INF,  0,  8,  3,INF,
+		INF,INF,INF,  0,INF,  6,
+		INF,INF,INF,  2,  0,  3,
+		INF,INF,INF,INF,INF,  0,
+	};
+	createGraph(G, (char *)"012345", (int*)arcs);
+	int visited[6] = { 0 };
 	printf("DFS£º");
 	DFS(G, visited, 0);
 	putchar('\n');

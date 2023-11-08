@@ -7,7 +7,7 @@
 */
 #include<stdio.h>
 #include<stdlib.h>
- #define MAXSIZE 5
+#define MAXSIZE 5
 typedef struct Graph{
 	char *vexs;//½Úµã
 	int **arcs;//±ß
