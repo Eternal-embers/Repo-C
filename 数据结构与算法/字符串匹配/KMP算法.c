@@ -90,8 +90,8 @@ int main()
 {
 	String *s = initString();//Ö÷´® 
 	String *s1 = initString();//Ä£Ê½´®
-	StringAssign(s,"aaabbaaababbb");
-	StringAssign(s1,"aaabab");
+	StringAssign(s,"bbssdaaaaaba");
+	StringAssign(s1,"aaaaa");
 	printString(s);
 	printString(s1);
 	int *next = getNext(s1);

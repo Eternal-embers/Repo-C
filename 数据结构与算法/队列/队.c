@@ -46,6 +46,7 @@ void dequeue(Node *Q)
 	Q->data--;
 	}
 }
+
 void printqueue(Node *Q)
 {
 	Q=Q->next;
